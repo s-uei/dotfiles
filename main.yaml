@@ -1,0 +1,28 @@
+- name: My favorite settings
+  hosts: localhost,
+  tasks:
+    - name: ensure zsh is installed
+      become: true
+      package:
+        name: zsh
+        state: present
+    - name: find zsh path
+      command: which zsh
+      register: zsh_path
+      changed_when: false    
+    - name: add zsh to /etc/shells
+      become: true
+      lineinfile:
+        path: /etc/shells
+        line: "{{ zsh_path.stdout }}"   
+    - name: set default shell
+      become: true
+      user:
+        name: "{{ ansible_user_id }}"
+        shell: "{{ zsh_path.stdout }}"
+    - name: install oh-my-zsh
+      shell: |
+        RUNZSH=no CHSH=no KEEP_ZSHRC=yes \
+        sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+      args:
+        creates: "{{ ansible_env.HOME }}/.oh-my-zsh"
