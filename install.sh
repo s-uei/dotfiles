@@ -46,4 +46,4 @@ fi
 
 # Add symbolic link of nvim config
 mkdir -p ~/.config
-ln -sfn .config/nvim ~/.config/nvim
+ln -sfn $PWD/.config/nvim ~/.config/nvim
