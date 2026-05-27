@@ -1,33 +1,41 @@
 #!/bin/bash
 
-# Install Homebrew
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+# Install libatomic1 for nodejs on Linux
+if [[ "$OSTYPE" != "darwin"* ]]; then
+  sudo apt update -y
+  sudo apt install -y libatomic1
+fi
 
 # Set excutable brew path
 if [[ "$OSTYPE" == "darwin"* ]]; then
   BREWBIN="/opt/homebrew/bin"
 else
-  sudo apt update -y
-  sudo apt install -y libatomic1
   BREWBIN="/home/linuxbrew/.linuxbrew/bin"
 fi
 
+# Install Homebrew
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
 # Brew install
-$BREWBIN/brew install gh zellij helix node git zsh
+$BREWBIN/brew install gh zellij node git zsh neovim
 
 # Npm install
 $BREWBIN/npm install -g opencommit
 
 # Set default shell as zsh
+if ! grep -qx "$BREWBIN/zsh" /etc/shells; then
+  echo $BREWBIN/zsh | sudo tee -a /etc/shells
+fi
 sudo chsh -s $BREWBIN/zsh $USER
 
 # Edit zshrc
-cat > "$HOME/.zshrc" <<'EOF'
+cat >"$HOME/.zshrc" <<'EOF'
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="robbyrussell"
 plugins=(git)
 source $ZSH/oh-my-zsh.sh
 EOF
+echo "eval \"\$($BREWBIN/brew shellenv zsh)\"" >>$HOME/.zshrc
 
 # Install oh-my-zsh
 $BREWBIN/git clone --depth 1 https://github.com/ohmyzsh/ohmyzsh.git "$HOME/.oh-my-zsh"
