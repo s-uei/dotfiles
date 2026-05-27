@@ -3,7 +3,7 @@
 # Install libatomic1 for nodejs on Linux
 if [[ "$OSTYPE" != "darwin"* ]]; then
   sudo apt update -y
-  sudo apt install -y libatomic1
+  sudo apt install -y libatomic1 build-essential
 fi
 
 # Set excutable brew path
