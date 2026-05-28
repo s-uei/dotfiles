@@ -17,7 +17,7 @@ fi
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 # Brew install
-$BREWBIN/brew install gh zellij node git zsh neovim
+$BREWBIN/brew install gh zellij node git zsh helix 
 
 # Npm install
 $BREWBIN/npm install -g opencommit
@@ -43,7 +43,3 @@ echo "eval \"\$($BREWBIN/brew shellenv zsh)\"" >>$HOME/.zshrc
 if [ ! -d ~/.oh-my-zsh ]; then
   $BREWBIN/git clone --depth 1 https://github.com/ohmyzsh/ohmyzsh.git "$HOME/.oh-my-zsh"
 fi
-
-# Add symbolic link of nvim config
-mkdir -p ~/.config
-ln -sfn $PWD/.config/nvim ~/.config/nvim
