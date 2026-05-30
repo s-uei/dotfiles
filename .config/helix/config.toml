@@ -1,0 +1,6 @@
+theme = 'github_dark'
+
+[editor]
+auto-format = true
+auto-pairs = true
+true-color = true
