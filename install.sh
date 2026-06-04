@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if [[ -z "$OPENAI_API_KEY" ]]; then
+  echo "Set OPENAI_API_KEY." >&2
+  exit 1
+fi
+
 # Install libatomic1 for nodejs on Linux
 if [[ "$OSTYPE" != "darwin"* ]]; then
   sudo apt update -y
@@ -25,9 +30,6 @@ $BREWBIN/npm install -g opencommit
 # Aider
 $BREWBIN/uv tool install --force --python python3.12 --with pip aider-chat@latest
 
-# Smartcat
-$BREWBIN/cargo install smartcat
-
 # Set default shell as zsh
 if ! grep -qx "$BREWBIN/zsh" /etc/shells; then
   echo $BREWBIN/zsh | sudo tee -a /etc/shells
@@ -42,8 +44,9 @@ export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="robbyrussell"
 plugins=(git)
 source $ZSH/oh-my-zsh.sh
-export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.local/bin:$HOME/.cargo/bin:$PATH"
 EOF
+echo "export OPENAI_API_KEY=${OPENAI_API_KEY}" >>$HOME/.zshrc
 echo "eval \"\$($BREWBIN/brew shellenv zsh)\"" >>$HOME/.zshrc
 
 # Install oh-my-zsh
@@ -54,4 +57,6 @@ fi
 # Aider config
 cat >"$HOME/.aider.conf.yml" <<'EOF'
 model: o4-mini
+auto-commit: false
 EOF
+
