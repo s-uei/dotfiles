@@ -57,7 +57,7 @@ fi
 # Aider config
 cat >"$HOME/.aider.conf.yml" <<'EOF'
 model: o4-mini
-auto-commit: false
+auto-commits: false
 EOF
 
 # OpenCommit
