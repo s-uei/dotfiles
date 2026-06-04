@@ -60,3 +60,26 @@ model: o4-mini
 auto-commit: false
 EOF
 
+# OpenCommit
+cat >"$HOME/.opencommit" << 'EOF'
+OCO_ONE_LINE_COMMIT=true
+OCO_MODEL=gpt-4o-mini
+OCO_API_URL=undefined
+OCO_PROXY=undefined
+OCO_API_CUSTOM_HEADERS=undefined
+OCO_AI_PROVIDER=openai
+OCO_TOKENS_MAX_INPUT=4096
+OCO_TOKENS_MAX_OUTPUT=500
+OCO_DESCRIPTION=false
+OCO_EMOJI=false
+OCO_LANGUAGE=en
+OCO_MESSAGE_TEMPLATE_PLACEHOLDER=$msg
+OCO_PROMPT_MODULE=conventional-commit
+OCO_TEST_MOCK_TYPE=commit-message
+OCO_OMIT_SCOPE=false
+OCO_GITPUSH=true
+OCO_WHY=false
+OCO_HOOK_AUTO_UNCOMMENT=false
+EOF
+echo "OCO_API_KEY=${OPENAI_API_KEY}" >>$HOME/.opencommit
+
