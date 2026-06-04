@@ -17,7 +17,7 @@ fi
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 # Brew install
-$BREWBIN/brew install gh zellij node git zsh helix 
+$BREWBIN/brew install gh zellij node git zsh helix uv
 
 # Npm install
 $BREWBIN/npm install -g opencommit
@@ -36,6 +36,7 @@ export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="robbyrussell"
 plugins=(git)
 source $ZSH/oh-my-zsh.sh
+export PATH="$HOME/.local/bin:$PATH"
 EOF
 echo "eval \"\$($BREWBIN/brew shellenv zsh)\"" >>$HOME/.zshrc
 
