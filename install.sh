@@ -17,10 +17,16 @@ fi
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 # Brew install
-$BREWBIN/brew install gh zellij node git zsh helix uv
+$BREWBIN/brew install gh zellij node git zsh helix uv rust
 
 # Npm install
 $BREWBIN/npm install -g opencommit
+
+# Aider
+$BREWBIN/uv tool install --force --python python3.12 --with pip aider-chat@latest
+
+# Smartcat
+$BREWBIN/cargo install smartcat
 
 # Set default shell as zsh
 if ! grep -qx "$BREWBIN/zsh" /etc/shells; then
@@ -44,3 +50,8 @@ echo "eval \"\$($BREWBIN/brew shellenv zsh)\"" >>$HOME/.zshrc
 if [ ! -d ~/.oh-my-zsh ]; then
   $BREWBIN/git clone --depth 1 https://github.com/ohmyzsh/ohmyzsh.git "$HOME/.oh-my-zsh"
 fi
+
+# Aider config
+cat >"$HOME/.aider.conf.yml" <<'EOF'
+model: o4-mini
+EOF
