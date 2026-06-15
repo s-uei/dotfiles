@@ -19,3 +19,12 @@ language-servers = [ "typescript-language-server", "tailwindcss-ls" ]
 name = "json"
 auto-format = true
 formatter = { command = "prettier", args=["--parser", "json"] }
+
+[[language]]
+name = "markdown"
+auto-format = true
+formatter = { command = "prettier", args=["--parser", "markdown"] }
+
+[[language]]
+name = "python"
+auto-format = true
