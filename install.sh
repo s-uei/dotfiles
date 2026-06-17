@@ -57,5 +57,4 @@ fi
 
 # OpenCommit
 $BREWBIN/oco config set OCO_API_KEY=$OPENAI_API_KEY
-$BREWBIN/oco config set OCO_MODEL=gpt-4o-mini
 
