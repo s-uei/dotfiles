@@ -78,8 +78,3 @@ OCO_HOOK_AUTO_UNCOMMENT=false
 EOF
 echo "OCO_API_KEY=${OPENAI_API_KEY}" >>$HOME/.opencommit
 
-# Alacritty
-if [[ "$OSTYPE" != "darwin"* ]]; then
-  mkdir -p /mnt/c/Users/$USER/.config/alacritty
-  cp .config/alacritty/alacritty.toml /mnt/c/Users/$USER/.config/alacritty/alacritty.toml
-fi
