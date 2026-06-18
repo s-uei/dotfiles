@@ -1,4 +1,4 @@
-theme = 'github_dark'
+theme = 'base16_default'
 
 [editor]
 auto-format = true
